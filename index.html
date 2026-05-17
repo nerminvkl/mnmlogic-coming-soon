@@ -116,36 +116,6 @@
 </head>
 <body>
 
-<!-- ══ INLINE SVG DEFS ══ -->
-<svg width="0" height="0" style="position:absolute;overflow:hidden">
-  <defs>
-    <!-- Crown icon — blue version for nav on white bg -->
-    <symbol id="logo-icon-blue" viewBox="0 0 200 180">
-      <polygon points="30,170 72,60 100,130" fill="#279AF1"/>
-      <polygon points="72,60 100,130 80,145" fill="rgba(39,154,241,0.45)"/>
-      <polygon points="70,0 100,130 130,0" fill="#279AF1"/>
-      <polygon points="100,130 84,155 70,0" fill="rgba(39,154,241,0.35)"/>
-      <polygon points="100,130 116,155 130,0" fill="rgba(39,154,241,0.22)"/>
-      <polygon points="170,170 128,60 100,130" fill="#279AF1"/>
-      <polygon points="128,60 100,130 120,145" fill="rgba(39,154,241,0.45)"/>
-      <polygon points="84,155 100,175 116,155 100,130" fill="#279AF1"/>
-      <polygon points="100,130 100,175 116,155" fill="rgba(39,154,241,0.38)"/>
-    </symbol>
-    <!-- Crown icon — white version for dark CTA -->
-    <symbol id="logo-icon-white" viewBox="0 0 200 180">
-      <polygon points="30,170 72,60 100,130" fill="#F7F7FF"/>
-      <polygon points="72,60 100,130 80,145" fill="rgba(247,247,255,0.38)"/>
-      <polygon points="70,0 100,130 130,0" fill="#F7F7FF"/>
-      <polygon points="100,130 84,155 70,0" fill="rgba(247,247,255,0.28)"/>
-      <polygon points="100,130 116,155 130,0" fill="rgba(247,247,255,0.18)"/>
-      <polygon points="170,170 128,60 100,130" fill="#F7F7FF"/>
-      <polygon points="128,60 100,130 120,145" fill="rgba(247,247,255,0.38)"/>
-      <polygon points="84,155 100,175 116,155 100,130" fill="#F7F7FF"/>
-      <polygon points="100,130 100,175 116,155" fill="rgba(247,247,255,0.3)"/>
-    </symbol>
-  </defs>
-</svg>
-
 
 <!-- ════════════════════════════════════
      NAV
@@ -154,9 +124,11 @@
   <nav class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between gap-6">
 
     <!-- Logo -->
-    <a href="#" class="flex items-center gap-2 flex-shrink-0">
-      <svg width="28" height="28" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
-      <span class="font-bold text-lg tracking-tight text-gray-900">MNM <span class="text-brand-blue">Logic</span></span>
+    <a href="#" class="flex items-center flex-shrink-0">
+      <img src="https://www.mnmlogic.com/logo.png"
+           alt="MNM Logic"
+           class="h-10 w-auto"
+           style="mix-blend-mode: multiply;"/>
     </a>
 
     <!-- Desktop nav -->
@@ -426,7 +398,7 @@
         <!-- Main card -->
         <div class="bg-white rounded-2xl border border-gray-100 shadow-xl p-8">
           <div class="flex items-center gap-3 mb-6">
-            <svg width="40" height="40" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
+            <img src="https://www.mnmlogic.com/logo.png" alt="MNM Logic" style="height:44px;width:auto;mix-blend-mode:multiply;"/>
             <div>
               <p class="font-bold text-gray-900">MNM Logic</p>
               <p class="text-xs text-gray-400">Web & Software Studio</p>
@@ -565,9 +537,8 @@
 ════════════════════════════════════ -->
 <footer class="max-w-6xl mx-auto px-5 md:px-8 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
   <div class="col-span-2 md:col-span-1">
-    <div class="flex items-center gap-2 mb-4">
-      <svg width="26" height="26" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
-      <span class="font-bold text-gray-900">MNM <span class="text-brand-blue">Logic</span></span>
+    <div class="mb-4">
+      <img src="https://www.mnmlogic.com/logo.png" alt="MNM Logic" style="height:38px;width:auto;mix-blend-mode:multiply;"/>
     </div>
     <p class="text-gray-400 text-sm leading-relaxed">Web & Software Studio<br/>Velika Kladuša, BiH</p>
     <p class="text-gray-400 text-sm mt-3">M–F 9AM–5PM CET</p>
