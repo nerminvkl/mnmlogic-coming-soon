@@ -1,29 +1,601 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MNM LOGIC</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="https://stats.mnmlogic.com/script.js" data-website-id="5b8220c1-5e06-4115-bacc-c94b973c9526"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MNM Logic — Web & Software Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans:  ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            bg:    '#131112',
+            paper: '#F7F7FF',
+            blue:  '#279AF1',
+            rose:  '#C49991',
+            slate: '#60656F',
+            card:  '#1c1a1b',
+            rule:  '#252224',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background: #131112;
+      color: #F7F7FF;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap { overflow: hidden; }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 34s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── HEADINGS ── */
+    .hero-headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(3.2rem, 9vw, 8rem);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: #F7F7FF;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: #C49991; /* rose for hero italic */
+    }
+
+    .section-heading {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #F7F7FF;
+    }
+    .section-heading em {
+      font-style: italic;
+      color: #279AF1; /* blue for section italic */
+    }
+
+    /* ── NAV ── */
+    .nav-bar {
+      background: rgba(19,17,18,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid #252224;
+    }
+
+    /* ── CAPABILITY ROWS ── */
+    .cap-row {
+      border-top: 1px solid #252224;
+      transition: background 0.25s;
+    }
+    .cap-row:last-child { border-bottom: 1px solid #252224; }
+    .cap-row:hover { background: #1a1819; }
+
+    /* ── PILLS ── */
+    .pill {
+      border: 1px solid #252224;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #60656F;
+      padding: 0.3rem 0.9rem;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.5); }
+
+    /* ── CLIENT PILL ── */
+    .client-pill {
+      border: 1px solid #252224;
+      border-radius: 9999px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #60656F;
+      white-space: nowrap;
+      margin: 0 0.5rem;
+      flex-shrink: 0;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .client-pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.5); }
+
+    /* ── BUTTONS ── */
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: #279AF1;
+      color: #131112;
+      font-weight: 600;
+      font-size: 0.83rem;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1.8rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-main:hover {
+      background: #4daaef;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(39,154,241,0.25);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: #F7F7FF;
+      font-size: 0.83rem;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1.8rem;
+      border-radius: 9999px;
+      border: 1px solid #252224;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: #60656F; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ── MISC ── */
+    .foot-link {
+      color: #60656F;
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .foot-link:hover { color: #F7F7FF; }
+
+    .svc-num {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #60656F;
+      min-width: 2rem;
+    }
+
+    /* blue dot pulse */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(1.4); }
+    }
+    .dot-pulse { animation: pulse-dot 2.4s ease-in-out infinite; }
+
+    /* logo white version (logo has black bg — we show it with mix-blend) */
+    .logo-img {
+      height: 36px;
+      width: auto;
+      /* The uploaded logo has black background; we use mix-blend-mode
+         so it composites cleanly over the dark nav */
+      mix-blend-mode: lighten;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="wrapper">
-        <center>
-            <img src="logo.png" style="width:300px;">
-        </center>
 
-        <h1>Designed by logic. Loved by users<span class="dot">.</span></h1>
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="nav-bar sticky top-0 z-50 px-6 md:px-14 py-3 flex items-center justify-between gap-6">
 
-        <p>Based in Velika Kladusa, BiH | E-mail: info@mnmlogic.com</p>
+  <!-- Logo -->
+  <a href="#" class="flex items-center gap-3 flex-shrink-0">
+    <img src="mnmlogicplavi.png" alt="MNM Logic" class="logo-img"/>
+  </a>
 
+  <!-- Links -->
+  <ul class="hidden md:flex items-center gap-8 list-none text-sm text-slate">
+    <li><a href="#capabilities" class="hover:text-paper transition-colors duration-200">Capabilities</a></li>
+    <li><a href="#clients"      class="hover:text-paper transition-colors duration-200">Clients</a></li>
+    <li><a href="#about"        class="hover:text-paper transition-colors duration-200">About</a></li>
+    <li><a href="#contact"      class="hover:text-paper transition-colors duration-200">Contact</a></li>
+  </ul>
+
+  <!-- CTA -->
+  <a href="mailto:info@mnmlogic.com" class="btn-main text-xs py-2 px-5 flex-shrink-0">
+    Work with us
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+    </svg>
+  </a>
+</nav>
+
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="px-6 md:px-14 pt-20 md:pt-32 pb-16 max-w-7xl mx-auto">
+
+  <!-- Eyebrow -->
+  <div class="mb-8 flex items-center gap-3 reveal">
+    <span class="w-2 h-2 rounded-full bg-blue dot-pulse inline-block"></span>
+    <span class="text-slate text-xs uppercase tracking-widest">Web &amp; Software Studio · Velika Kladuša, BiH</span>
+  </div>
+
+  <!-- Headline -->
+  <h1 class="hero-headline mb-12 reveal d1">
+    We build<br/>
+    <em>things&nbsp;people</em><br/>
+    actually&nbsp;use.
+  </h1>
+
+  <!-- Tagline -->
+  <p class="text-slate text-base md:text-lg max-w-md leading-relaxed mb-10 reveal d2"
+     style="font-style: italic; color: #C49991;">
+    Designed by logic. Loved by users.
+  </p>
+
+  <!-- Buttons -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 reveal d3">
+    <a href="#capabilities" class="btn-main">
+      See our capabilities
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+      </svg>
+    </a>
+    <a href="mailto:info@mnmlogic.com" class="btn-ghost">
+      info@mnmlogic.com
+    </a>
+  </div>
+
+  <!-- Stats -->
+  <div class="mt-20 pt-8 border-t border-rule grid grid-cols-2 md:grid-cols-4 gap-10 reveal d4">
+    <div>
+      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">5+</p>
+      <p class="text-slate text-xs uppercase tracking-widest">Years active</p>
     </div>
+    <div>
+      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">40+</p>
+      <p class="text-slate text-xs uppercase tracking-widest">Projects shipped</p>
+    </div>
+    <div>
+      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">12+</p>
+      <p class="text-slate text-xs uppercase tracking-widest">Clients served</p>
+    </div>
+    <div>
+      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">100%</p>
+      <p class="text-slate text-xs uppercase tracking-widest">Remote-ready</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ SERVICE TICKER ══════════════ -->
+<div class="border-y border-rule py-4 ticker-wrap">
+  <div class="ticker-track" id="svcTicker"></div>
+</div>
+
+
+<!-- ══════════════ CAPABILITIES ══════════════ -->
+<section id="capabilities" class="px-6 md:px-14 py-24 max-w-7xl mx-auto">
+
+  <div class="mb-16 reveal">
+    <p class="text-slate text-xs uppercase tracking-widest mb-5">What we do</p>
+    <h2 class="section-heading">Built around<br/><em>your&nbsp;goals</em></h2>
+  </div>
+
+  <!-- Row 01 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">01</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Web Development</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Custom web applications from landing pages to full-stack platforms — fast, secure, and scalable.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">Django</span><span class="pill">React</span><span class="pill">REST API</span>
+    </div>
+  </div>
+
+  <!-- Row 02 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">02</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">UI / UX Design</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Interfaces people actually enjoy — intuitive, beautiful, and built for conversion.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">Figma</span><span class="pill">Prototyping</span>
+    </div>
+  </div>
+
+  <!-- Row 03 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">03</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Business Software</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Accounting systems, ERP modules, and custom tools — tailored to FBiH regulations and local market needs.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">FBiH Standards</span><span class="pill">ERP</span>
+    </div>
+  </div>
+
+  <!-- Row 04 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">04</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Cloud &amp; Deployment</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Docker, CI/CD pipelines, and reliable VPS infrastructure — from staging to production.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">Docker</span><span class="pill">VPS</span><span class="pill">SSL</span>
+    </div>
+  </div>
+
+  <!-- Row 05 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">05</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Maintenance &amp; Support</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Ongoing updates, security patches, and rapid response — so your business never skips a beat.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">Monitoring</span><span class="pill">Support</span>
+    </div>
+  </div>
+
+  <!-- Row 06 -->
+  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
+    <span class="svc-num">06</span>
+    <div>
+      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Consulting</h3>
+      <p class="text-slate text-sm leading-relaxed max-w-lg">Architecture planning, tech stack selection, and digital strategy — clear guidance, no jargon.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end">
+      <span class="pill">Strategy</span><span class="pill">Audit</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════ CLIENTS ══════════════ -->
+<section id="clients" class="border-t border-rule py-20">
+  <div class="px-6 md:px-14 max-w-7xl mx-auto mb-12 reveal">
+    <p class="text-slate text-xs uppercase tracking-widest mb-5">Trusted by</p>
+    <h2 class="section-heading">Clients who<br/><em>believe&nbsp;in&nbsp;us</em></h2>
+  </div>
+  <div class="ticker-wrap mt-8">
+    <div class="ticker-track" id="clientTrack"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section id="about" class="border-t border-rule px-6 md:px-14 py-24 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+    <!-- Text -->
+    <div class="reveal">
+      <p class="text-slate text-xs uppercase tracking-widest mb-6">Who we are</p>
+      <h2 class="section-heading mb-8">Logic<br/>meets <em>craft</em></h2>
+      <p class="text-slate text-sm leading-relaxed mb-4 max-w-md">
+        MNM Logic is a web and software studio based in Velika Kladuša, Bosnia &amp; Herzegovina. We partner with businesses across the region to ship digital products that work — cleanly engineered and built to last.
+      </p>
+      <p class="text-slate text-sm leading-relaxed max-w-md">
+        Great software is equal parts logic and empathy. Every project starts with understanding the human on the other end — and ends when they tell us they love using it.
+      </p>
+      <div class="mt-8 flex items-center gap-5 flex-wrap">
+        <a href="mailto:info@mnmlogic.com" class="foot-link text-xs uppercase tracking-widest hover:text-paper">Email</a>
+        <span class="text-rule text-xs">|</span>
+        <a href="#" class="foot-link text-xs uppercase tracking-widest hover:text-paper">LinkedIn</a>
+        <span class="text-rule text-xs">|</span>
+        <a href="#" class="foot-link text-xs uppercase tracking-widest hover:text-paper">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Quote card -->
+    <div class="reveal d2">
+      <div class="border border-rule rounded-2xl p-9 bg-card">
+        <!-- Logo inside card -->
+        <img src="mnmlogicplavi.png" alt="MNM Logic" class="logo-img mb-8" style="height:48px;"/>
+        <p class="font-serif italic text-paper leading-snug mb-8"
+           style="font-size: clamp(1.3rem, 3vw, 1.9rem);">
+          "Designed by logic.<br/>Loved by users."
+        </p>
+        <div class="flex items-center gap-3 pt-6 border-t border-rule">
+          <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.15);
+                      display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">
+            M
+          </div>
+          <div>
+            <p class="text-paper text-sm font-medium">MNM Logic</p>
+            <p class="text-slate text-xs">Velika Kladuša, BiH</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<section class="border-t border-rule px-6 md:px-14 py-24 max-w-7xl mx-auto">
+  <div class="mb-14 reveal">
+    <p class="text-slate text-xs uppercase tracking-widest mb-5">Kind words</p>
+    <h2 class="section-heading">Clients love<br/><em>working&nbsp;with&nbsp;us</em></h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <div class="border border-rule rounded-2xl p-8 bg-card reveal d1">
+      <p class="text-slate text-sm leading-relaxed italic mb-8">
+        "The team at MNM Logic delivered our accounting platform in record time — clean code, zero bugs at launch, and they understood our local compliance requirements from day one."
+      </p>
+      <div class="flex items-center gap-3 pt-5 border-t border-rule">
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);
+                    display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">A</div>
+        <div>
+          <p class="text-paper text-sm font-medium">Amir Hadžić</p>
+          <p class="text-slate text-xs">CFO, RetailPro</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-rule rounded-2xl p-8 bg-card reveal d2">
+      <p class="text-slate text-sm leading-relaxed italic mb-8">
+        "Working with MNM Logic was a breath of fresh air. Fast communication, thoughtful design decisions, and a product we're genuinely proud to show our customers."
+      </p>
+      <div class="flex items-center gap-3 pt-5 border-t border-rule">
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(196,153,145,0.15);
+                    display:flex;align-items:center;justify-content:center;color:#C49991;font-weight:700;font-size:.8rem;">S</div>
+        <div>
+          <p class="text-paper text-sm font-medium">Sara Kršo</p>
+          <p class="text-slate text-xs">Founder, EduNext</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-rule rounded-2xl p-8 bg-card reveal d3">
+      <p class="text-slate text-sm leading-relaxed italic mb-8">
+        "They don't just write code — they ask the right questions, push back when needed, and always deliver something better than what we imagined."
+      </p>
+      <div class="flex items-center gap-3 pt-5 border-t border-rule">
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);
+                    display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">N</div>
+        <div>
+          <p class="text-paper text-sm font-medium">Nermin Ibišević</p>
+          <p class="text-slate text-xs">CEO, FastLog</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ CTA ══════════════ -->
+<section id="contact" class="border-t border-rule px-6 md:px-14 py-28 max-w-7xl mx-auto text-center">
+  <div class="reveal">
+    <p class="text-slate text-xs uppercase tracking-widest mb-10">Ready to start?</p>
+    <h2 class="section-heading mb-12">
+      Let's build<br/><em>something&nbsp;great</em>
+    </h2>
+    <a href="mailto:info@mnmlogic.com" class="btn-main text-base px-10 py-4">
+      Work with us
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="border-t border-rule px-6 md:px-14 py-14 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+  <div>
+    <img src="mnmlogicplavi.png" alt="MNM Logic" class="logo-img mb-4" style="height:32px;"/>
+    <p class="text-slate text-xs leading-relaxed">Web &amp; Software Studio<br/>Velika Kladuša, BiH</p>
+  </div>
+  <div>
+    <p class="text-paper text-xs uppercase tracking-widest mb-4">Contact</p>
+    <ul class="space-y-2 list-none">
+      <li><a href="mailto:info@mnmlogic.com" class="foot-link">info@mnmlogic.com</a></li>
+      <li><span class="text-slate text-xs">M–F 9AM–5PM CET</span></li>
+    </ul>
+  </div>
+  <div>
+    <p class="text-paper text-xs uppercase tracking-widest mb-4">Site</p>
+    <ul class="space-y-2 list-none">
+      <li><a href="#capabilities" class="foot-link">Capabilities</a></li>
+      <li><a href="#clients"      class="foot-link">Clients</a></li>
+      <li><a href="#about"        class="foot-link">About</a></li>
+      <li><a href="#contact"      class="foot-link">Contact</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="text-paper text-xs uppercase tracking-widest mb-4">Social</p>
+    <ul class="space-y-2 list-none">
+      <li><a href="#" class="foot-link">LinkedIn</a></li>
+      <li><a href="#" class="foot-link">GitHub</a></li>
+      <li><a href="#" class="foot-link">Instagram</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="border-t border-rule px-6 md:px-14 py-5 max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+  <p class="text-slate text-xs">&copy; 2025 MNM Logic. All rights reserved.</p>
+  <p class="text-slate text-xs">Designed by MNM Logic</p>
+</div>
+
+
+<!-- ══════════════ SCRIPTS ══════════════ -->
+<script>
+  // ── SERVICE TICKER ──
+  const svcItems = [
+    'Web Development', 'UI / UX Design', 'Business Software',
+    'Cloud & Deployment', 'Maintenance & Support', 'Technical Consulting'
+  ];
+  const svcTicker = document.getElementById('svcTicker');
+  svcTicker.innerHTML = [...svcItems, ...svcItems]
+    .map(s => `
+      <span style="display:inline-flex;align-items:center;gap:1.5rem;
+                   padding:0 1.8rem;font-size:0.75rem;letter-spacing:0.12em;
+                   text-transform:uppercase;color:#60656F;">
+        ${s}
+        <span style="color:#279AF1;font-size:0.55rem;">✦</span>
+      </span>`)
+    .join('');
+
+  // ── CLIENT TICKER ──
+  const clients = [
+    { name: 'RetailPro',  sector: 'E-Commerce'  },
+    { name: 'MediCare+',  sector: 'Healthcare'  },
+    { name: 'LexGroup',   sector: 'Legal'        },
+    { name: 'BuildTech',  sector: 'Construction' },
+    { name: 'FastLog',    sector: 'Logistics'    },
+    { name: 'EduNext',    sector: 'Education'    },
+    { name: 'AgroSmart',  sector: 'Agriculture'  },
+    { name: 'FinAxis',    sector: 'Finance'      },
+  ];
+  const clientTrack = document.getElementById('clientTrack');
+  clientTrack.innerHTML = [...clients, ...clients]
+    .map(c => `<span class="client-pill">${c.name}<span style="opacity:.4;font-size:.65rem;margin-left:.4rem;">· ${c.sector}</span></span>`)
+    .join('');
+
+  // ── SCROLL REVEAL ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
 </body>
-
-
 </html>
-
-
-
