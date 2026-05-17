@@ -7,25 +7,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
-            sans:  ['"DM Sans"', 'system-ui', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           colors: {
-            bg:    '#131112',
-            paper: '#F7F7FF',
-            blue:  '#279AF1',
-            rose:  '#C49991',
-            slate: '#60656F',
-            card:  '#1c1a1b',
-            rule:  '#252224',
-          },
+            brand: {
+              blue:  '#279AF1',
+              rose:  '#C49991',
+              slate: '#60656F',
+              dark:  '#131112',
+              light: '#F7F7FF',
+            }
+          }
         }
       }
     }
@@ -33,394 +30,427 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    body {
-      background: #131112;
-      color: #F7F7FF;
-      font-family: 'DM Sans', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+    body { font-family: 'Inter', system-ui, sans-serif; color: #131112; background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* ── GRADIENT TEXT ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #131112 0%, #279AF1 60%, #C49991 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-blue {
+      background: linear-gradient(135deg, #279AF1 0%, #0e6fbf 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* ── TICKER ── */
-    .ticker-wrap { overflow: hidden; }
-    .ticker-track { display:flex; width:max-content; animation: ticker 34s linear infinite; }
-    .ticker-track:hover { animation-play-state: paused; }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    /* ── HERO BG GRADIENT ── */
+    .hero-bg {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(39,154,241,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 90% 20%, rgba(196,153,145,0.1) 0%, transparent 60%),
+                  #ffffff;
     }
 
-    /* ── LOGO SVG ── */
-    .logo-svg { display:block; }
-
-    /* White logo glow — subtle on dark bg */
-    .logo-glow {
-      filter: drop-shadow(0 0 6px rgba(247,247,255,0.55))
-              drop-shadow(0 0 14px rgba(39,154,241,0.25));
-      transition: filter 0.3s;
+    /* ── GRID PATTERN ── */
+    .grid-bg {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23279AF1' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-    .logo-glow:hover {
-      filter: drop-shadow(0 0 10px rgba(247,247,255,0.8))
-              drop-shadow(0 0 22px rgba(39,154,241,0.45));
-    }
-
-    /* ── HEADINGS ── */
-    .hero-headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(3.2rem, 9vw, 8rem);
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      color: #F7F7FF;
-    }
-    .hero-headline em { font-style: italic; color: #C49991; }
-
-    .section-heading {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: #F7F7FF;
-    }
-    .section-heading em { font-style: italic; color: #279AF1; }
 
     /* ── NAV ── */
-    .nav-bar {
-      background: rgba(19,17,18,0.93);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid #252224;
+    .nav-scrolled { box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+
+    /* ── FEATURE CARD ── */
+    .feature-card {
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(39,154,241,0.1);
     }
 
-    /* ── CAPABILITY ROWS ── */
-    .cap-row { border-top: 1px solid #252224; transition: background 0.25s; }
-    .cap-row:last-child { border-bottom: 1px solid #252224; }
-    .cap-row:hover { background: #1a1819; }
+    /* ── CLIENT LOGO TICKER ── */
+    .ticker-wrap { overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent); }
+    .ticker-track { display: flex; width: max-content; animation: ticker 28s linear infinite; }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ── PILLS ── */
-    .pill {
-      border: 1px solid #252224;
-      border-radius: 9999px;
-      font-size: 0.7rem; letter-spacing: 0.06em;
-      text-transform: uppercase; color: #60656F;
-      padding: 0.3rem 0.9rem; white-space: nowrap;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.45); }
-
-    /* ── CLIENT PILL ── */
-    .client-pill {
-      border: 1px solid #252224; border-radius: 9999px;
-      padding: 0.5rem 1.5rem; font-size: 0.75rem;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: #60656F; white-space: nowrap; margin: 0 0.5rem; flex-shrink: 0;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .client-pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.45); }
-
-    /* ── BUTTONS ── */
-    .btn-main {
-      display:inline-flex; align-items:center; gap:0.45rem;
-      background:#279AF1; color:#131112;
-      font-weight:600; font-size:0.83rem; letter-spacing:0.04em;
-      padding:0.75rem 1.8rem; border-radius:9999px;
-      text-decoration:none;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-main:hover { background:#4daaef; transform:translateY(-1px); box-shadow:0 8px 24px rgba(39,154,241,0.25); }
-
-    .btn-ghost {
-      display:inline-flex; align-items:center; gap:0.45rem;
-      background:transparent; color:#F7F7FF;
-      font-size:0.83rem; letter-spacing:0.04em;
-      padding:0.75rem 1.8rem; border-radius:9999px;
-      border:1px solid #252224; text-decoration:none;
-      transition:border-color 0.2s;
-    }
-    .btn-ghost:hover { border-color:#60656F; }
+    /* ── TESTIMONIAL CARD ── */
+    .testi-card { transition: box-shadow 0.25s; }
+    .testi-card:hover { box-shadow: 0 16px 40px rgba(39,154,241,0.1); }
 
     /* ── SCROLL REVEAL ── */
-    .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.75s ease, transform 0.75s ease; }
-    .reveal.on { opacity:1; transform:none; }
-    .d1 { transition-delay:.08s; }
-    .d2 { transition-delay:.16s; }
-    .d3 { transition-delay:.24s; }
-    .d4 { transition-delay:.32s; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+    .d3 { transition-delay: .24s; }
+    .d4 { transition-delay: .32s; }
+    .d5 { transition-delay: .40s; }
+    .d6 { transition-delay: .48s; }
 
-    /* ── MISC ── */
-    .foot-link { color:#60656F; font-size:0.82rem; text-decoration:none; transition:color 0.2s; }
-    .foot-link:hover { color:#F7F7FF; }
-    .svc-num { font-family:'DM Serif Display',serif; font-style:italic; font-size:1rem; color:#60656F; min-width:2rem; }
-
-    @keyframes pulse-dot {
-      0%,100% { opacity:1; transform:scale(1); }
-      50%      { opacity:0.6; transform:scale(1.4); }
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(39,154,241,0.08);
+      border: 1px solid rgba(39,154,241,0.2);
+      color: #279AF1;
+      border-radius: 9999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
     }
-    .dot-pulse { animation: pulse-dot 2.4s ease-in-out infinite; }
+
+    /* ── LOGO MARK SVG GLOW (white bg version — blue icon) ── */
+    .logo-mark { display: inline-block; }
+
+    /* CTA section gradient */
+    .cta-bg {
+      background: linear-gradient(135deg, #131112 0%, #1a2a3a 50%, #131112 100%);
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
   </style>
 </head>
 <body>
 
-<!--
-  ██╗      ██████╗  ██████╗  ██████╗
-  ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
-  ██║     ██║   ██║██║  ███╗██║   ██║
-  ██║     ██║   ██║██║   ██║██║   ██║
-  ███████╗╚██████╔╝╚██████╔╝╚██████╔╝
--->
-
-<!-- ══════════════ INLINE SVG LOGO (reusable via <use>) ══════════════
-     Crown shape traced from the original PNG.
-     All paths in white so it pops on any dark background.
-     The shadow facets use semi-transparent white for depth.
--->
-<svg width="0" height="0" style="position:absolute">
+<!-- ══ INLINE SVG DEFS ══ -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden">
   <defs>
-    <!-- ICON ONLY (crown mark) -->
-    <symbol id="logo-icon" viewBox="0 0 200 180">
-      <!-- Left outer spike -->
-      <polygon points="30,170 72,60 100,130" fill="#F7F7FF"/>
-      <!-- Left shadow facet -->
-      <polygon points="72,60 100,130 80,145" fill="rgba(247,247,255,0.35)"/>
-      <!-- Centre spike -->
-      <polygon points="70,0 100,130 130,0" fill="#F7F7FF"/>
-      <!-- Centre shadow left -->
-      <polygon points="100,130 84,155 70,0" fill="rgba(247,247,255,0.28)"/>
-      <!-- Centre shadow right -->
-      <polygon points="100,130 116,155 130,0" fill="rgba(247,247,255,0.18)"/>
-      <!-- Right outer spike -->
-      <polygon points="170,170 128,60 100,130" fill="#F7F7FF"/>
-      <!-- Right shadow facet -->
-      <polygon points="128,60 100,130 120,145" fill="rgba(247,247,255,0.35)"/>
-      <!-- Bottom gem / notch -->
-      <polygon points="84,155 100,175 116,155 100,130" fill="#F7F7FF"/>
-      <!-- Bottom gem shadow -->
-      <polygon points="100,130 100,175 116,155" fill="rgba(247,247,255,0.3)"/>
+    <!-- Crown icon — blue version for nav on white bg -->
+    <symbol id="logo-icon-blue" viewBox="0 0 200 180">
+      <polygon points="30,170 72,60 100,130" fill="#279AF1"/>
+      <polygon points="72,60 100,130 80,145" fill="rgba(39,154,241,0.45)"/>
+      <polygon points="70,0 100,130 130,0" fill="#279AF1"/>
+      <polygon points="100,130 84,155 70,0" fill="rgba(39,154,241,0.35)"/>
+      <polygon points="100,130 116,155 130,0" fill="rgba(39,154,241,0.22)"/>
+      <polygon points="170,170 128,60 100,130" fill="#279AF1"/>
+      <polygon points="128,60 100,130 120,145" fill="rgba(39,154,241,0.45)"/>
+      <polygon points="84,155 100,175 116,155 100,130" fill="#279AF1"/>
+      <polygon points="100,130 100,175 116,155" fill="rgba(39,154,241,0.38)"/>
     </symbol>
-
-    <!-- FULL LOCKUP (icon + wordmark) -->
-    <symbol id="logo-full" viewBox="0 0 340 200">
-      <!-- Crown mark (scaled + centered above text) -->
-      <g transform="translate(70,0) scale(1)">
-        <polygon points="30,115 67,40 95,88" fill="#F7F7FF"/>
-        <polygon points="67,40 95,88 76,100" fill="rgba(247,247,255,0.32)"/>
-        <polygon points="55,0 95,88 135,0" fill="#F7F7FF"/>
-        <polygon points="95,88 80,108 55,0" fill="rgba(247,247,255,0.26)"/>
-        <polygon points="95,88 110,108 135,0" fill="rgba(247,247,255,0.17)"/>
-        <polygon points="160,115 123,40 95,88" fill="#F7F7FF"/>
-        <polygon points="123,40 95,88 114,100" fill="rgba(247,247,255,0.32)"/>
-        <polygon points="80,108 95,122 110,108 95,88" fill="#F7F7FF"/>
-        <polygon points="95,88 95,122 110,108" fill="rgba(247,247,255,0.28)"/>
-      </g>
-      <!-- Wordmark: MNM in blue, LOGIC in white -->
-      <text x="0" y="185"
-            font-family="'DM Sans', system-ui, sans-serif"
-            font-weight="600"
-            font-size="48"
-            letter-spacing="2"
-            fill="#279AF1">MNM</text>
-      <text x="164" y="185"
-            font-family="'DM Sans', system-ui, sans-serif"
-            font-weight="300"
-            font-size="48"
-            letter-spacing="2"
-            fill="#F7F7FF"> LOGIC</text>
+    <!-- Crown icon — white version for dark CTA -->
+    <symbol id="logo-icon-white" viewBox="0 0 200 180">
+      <polygon points="30,170 72,60 100,130" fill="#F7F7FF"/>
+      <polygon points="72,60 100,130 80,145" fill="rgba(247,247,255,0.38)"/>
+      <polygon points="70,0 100,130 130,0" fill="#F7F7FF"/>
+      <polygon points="100,130 84,155 70,0" fill="rgba(247,247,255,0.28)"/>
+      <polygon points="100,130 116,155 130,0" fill="rgba(247,247,255,0.18)"/>
+      <polygon points="170,170 128,60 100,130" fill="#F7F7FF"/>
+      <polygon points="128,60 100,130 120,145" fill="rgba(247,247,255,0.38)"/>
+      <polygon points="84,155 100,175 116,155 100,130" fill="#F7F7FF"/>
+      <polygon points="100,130 100,175 116,155" fill="rgba(247,247,255,0.3)"/>
     </symbol>
   </defs>
 </svg>
 
 
-<!-- ══════════════ NAV ══════════════ -->
-<nav class="nav-bar sticky top-0 z-50 px-6 md:px-14 py-3 flex items-center justify-between gap-6">
+<!-- ════════════════════════════════════
+     NAV
+════════════════════════════════════ -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100" id="navbar">
+  <nav class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between gap-6">
 
-  <a href="#" class="flex items-center gap-3 flex-shrink-0 logo-glow">
-    <!-- Icon mark + text lockup -->
-    <svg class="logo-svg" width="160" height="38" viewBox="0 0 340 200" aria-label="MNM Logic">
-      <use href="#logo-full"/>
-    </svg>
-  </a>
-
-  <ul class="hidden md:flex items-center gap-8 list-none text-sm text-slate">
-    <li><a href="#capabilities" class="hover:text-paper transition-colors duration-200">Capabilities</a></li>
-    <li><a href="#clients"      class="hover:text-paper transition-colors duration-200">Clients</a></li>
-    <li><a href="#about"        class="hover:text-paper transition-colors duration-200">About</a></li>
-    <li><a href="#contact"      class="hover:text-paper transition-colors duration-200">Contact</a></li>
-  </ul>
-
-  <a href="mailto:info@mnmlogic.com" class="btn-main text-xs py-2 px-5 flex-shrink-0">
-    Work with us
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
-    </svg>
-  </a>
-</nav>
-
-
-<!-- ══════════════ HERO ══════════════ -->
-<section class="px-6 md:px-14 pt-20 md:pt-32 pb-16 max-w-7xl mx-auto">
-
-  <div class="mb-8 flex items-center gap-3 reveal">
-    <span class="w-2 h-2 rounded-full bg-blue dot-pulse inline-block"></span>
-    <span class="text-slate text-xs uppercase tracking-widest">Web &amp; Software Studio · Velika Kladuša, BiH</span>
-  </div>
-
-  <h1 class="hero-headline mb-10 reveal d1">
-    We build<br/>
-    <em>things&nbsp;people</em><br/>
-    actually&nbsp;use.
-  </h1>
-
-  <p class="text-rose text-base md:text-lg max-w-md leading-relaxed mb-10 font-light italic reveal d2">
-    Designed by logic. Loved by users.
-  </p>
-
-  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 reveal d3">
-    <a href="#capabilities" class="btn-main">
-      See our capabilities
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
-      </svg>
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 flex-shrink-0">
+      <svg width="28" height="28" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
+      <span class="font-bold text-lg tracking-tight text-gray-900">MNM <span class="text-brand-blue">Logic</span></span>
     </a>
-    <a href="mailto:info@mnmlogic.com" class="btn-ghost">info@mnmlogic.com</a>
-  </div>
 
-  <!-- Stats -->
-  <div class="mt-20 pt-8 border-t border-rule grid grid-cols-2 md:grid-cols-4 gap-10 reveal d4">
-    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">5+</p><p class="text-slate text-xs uppercase tracking-widest">Years active</p></div>
-    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">40+</p><p class="text-slate text-xs uppercase tracking-widest">Projects shipped</p></div>
-    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">12+</p><p class="text-slate text-xs uppercase tracking-widest">Clients served</p></div>
-    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">100%</p><p class="text-slate text-xs uppercase tracking-widest">Remote-ready</p></div>
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-7 list-none text-sm font-medium text-gray-600">
+      <li><a href="#features" class="hover:text-brand-blue transition-colors">Services</a></li>
+      <li><a href="#clients"  class="hover:text-brand-blue transition-colors">Clients</a></li>
+      <li><a href="#about"    class="hover:text-brand-blue transition-colors">About</a></li>
+      <li><a href="#contact"  class="hover:text-brand-blue transition-colors">Contact</a></li>
+    </ul>
+
+    <!-- CTA -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="mailto:info@mnmlogic.com" class="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors">Sign in</a>
+      <a href="mailto:info@mnmlogic.com"
+         class="bg-brand-blue text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-500 transition-all shadow-sm hover:shadow-blue-200 hover:shadow-lg">
+        Get started free →
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Menu">
+      <svg class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden border-t border-gray-100 bg-white">
+    <ul class="list-none px-5 py-4 flex flex-col gap-3 text-sm font-medium text-gray-600">
+      <li><a href="#features" class="block py-1 hover:text-brand-blue" onclick="document.getElementById('mobile-menu').classList.remove('open')">Services</a></li>
+      <li><a href="#clients"  class="block py-1 hover:text-brand-blue" onclick="document.getElementById('mobile-menu').classList.remove('open')">Clients</a></li>
+      <li><a href="#about"    class="block py-1 hover:text-brand-blue" onclick="document.getElementById('mobile-menu').classList.remove('open')">About</a></li>
+      <li><a href="#contact"  class="block py-1 hover:text-brand-blue" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a></li>
+      <li class="pt-2 border-t border-gray-100">
+        <a href="mailto:info@mnmlogic.com" class="block w-full bg-brand-blue text-white text-center font-semibold py-2.5 rounded-lg">Get started free →</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero-bg grid-bg pt-20 pb-24 md:pt-28 md:pb-32 px-5">
+  <div class="max-w-4xl mx-auto text-center">
+
+    <!-- Badge -->
+    <div class="flex justify-center mb-6 reveal">
+      <span class="badge">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-blue inline-block animate-pulse"></span>
+        Based in Velika Kladuša, BiH
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 reveal d1">
+      <span class="gradient-text">Web & Software</span><br/>
+      <span class="text-gray-900">Built to</span>
+      <span class="gradient-text-blue"> last.</span>
+    </h1>
+
+    <!-- Sub -->
+    <p class="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed reveal d2">
+      MNM Logic designs and builds web applications, business software, and digital products
+      for companies across Bosnia &amp; Herzegovina — and beyond.
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal d3">
+      <a href="#contact"
+         class="bg-brand-blue text-white font-semibold px-7 py-3.5 rounded-lg text-base hover:bg-blue-500 transition-all shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300 hover:-translate-y-0.5">
+        Start a project →
+      </a>
+      <a href="#features"
+         class="flex items-center gap-2 text-gray-600 font-semibold px-7 py-3.5 rounded-lg text-base border border-gray-200 hover:border-brand-blue hover:text-brand-blue bg-white transition-all">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        See our services
+      </a>
+    </div>
+
+    <!-- Social proof numbers -->
+    <div class="mt-16 flex flex-wrap items-center justify-center gap-10 reveal d4">
+      <div class="text-center">
+        <p class="text-3xl font-extrabold text-gray-900">40+</p>
+        <p class="text-sm text-gray-400 mt-0.5">Projects shipped</p>
+      </div>
+      <div class="w-px h-8 bg-gray-200 hidden sm:block"></div>
+      <div class="text-center">
+        <p class="text-3xl font-extrabold text-gray-900">12+</p>
+        <p class="text-sm text-gray-400 mt-0.5">Happy clients</p>
+      </div>
+      <div class="w-px h-8 bg-gray-200 hidden sm:block"></div>
+      <div class="text-center">
+        <p class="text-3xl font-extrabold text-gray-900">5+</p>
+        <p class="text-sm text-gray-400 mt-0.5">Years experience</p>
+      </div>
+      <div class="w-px h-8 bg-gray-200 hidden sm:block"></div>
+      <div class="text-center">
+        <p class="text-3xl font-extrabold text-gray-900">100%</p>
+        <p class="text-sm text-gray-400 mt-0.5">Remote-ready</p>
+      </div>
+    </div>
   </div>
 </section>
 
 
-<!-- ══════════════ SERVICE TICKER ══════════════ -->
-<div class="border-y border-rule py-4 ticker-wrap">
-  <div class="ticker-track" id="svcTicker"></div>
-</div>
-
-
-<!-- ══════════════ CAPABILITIES ══════════════ -->
-<section id="capabilities" class="px-6 md:px-14 py-24 max-w-7xl mx-auto">
-
-  <div class="mb-16 reveal">
-    <p class="text-slate text-xs uppercase tracking-widest mb-5">What we do</p>
-    <h2 class="section-heading">Built around<br/><em>your&nbsp;goals</em></h2>
+<!-- ════════════════════════════════════
+     CLIENTS LOGO STRIP
+════════════════════════════════════ -->
+<section id="clients" class="py-14 border-y border-gray-100 bg-gray-50/60">
+  <div class="max-w-6xl mx-auto px-5 mb-8 text-center reveal">
+    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Trusted by companies across the region</p>
   </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">01</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Web Development</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Custom web applications from landing pages to full-stack platforms — fast, secure, and scalable.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Django</span><span class="pill">React</span><span class="pill">REST API</span></div>
-  </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">02</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">UI / UX Design</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Interfaces people actually enjoy — intuitive, beautiful, and built for conversion.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Figma</span><span class="pill">Prototyping</span></div>
-  </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">03</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Business Software</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Accounting systems, ERP modules, and custom tools — tailored to FBiH regulations and local market needs.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">FBiH Standards</span><span class="pill">ERP</span></div>
-  </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">04</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Cloud &amp; Deployment</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Docker, CI/CD pipelines, and reliable VPS infrastructure — from staging to production.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Docker</span><span class="pill">VPS</span><span class="pill">SSL</span></div>
-  </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">05</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Maintenance &amp; Support</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Ongoing updates, security patches, and rapid response — so your business never skips a beat.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Monitoring</span><span class="pill">Support</span></div>
-  </div>
-
-  <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
-    <span class="svc-num">06</span>
-    <div>
-      <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Consulting</h3>
-      <p class="text-slate text-sm leading-relaxed max-w-lg">Architecture planning, tech stack selection, and digital strategy — clear guidance, no jargon.</p>
-    </div>
-    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Strategy</span><span class="pill">Audit</span></div>
-  </div>
-
-</section>
-
-
-<!-- ══════════════ CLIENTS ══════════════ -->
-<section id="clients" class="border-t border-rule py-20">
-  <div class="px-6 md:px-14 max-w-7xl mx-auto mb-12 reveal">
-    <p class="text-slate text-xs uppercase tracking-widest mb-5">Trusted by</p>
-    <h2 class="section-heading">Clients who<br/><em>believe&nbsp;in&nbsp;us</em></h2>
-  </div>
-  <div class="ticker-wrap mt-8">
+  <div class="ticker-wrap">
     <div class="ticker-track" id="clientTrack"></div>
   </div>
 </section>
 
 
-<!-- ══════════════ ABOUT ══════════════ -->
-<section id="about" class="border-t border-rule px-6 md:px-14 py-24 max-w-7xl mx-auto">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+<!-- ════════════════════════════════════
+     SERVICES / FEATURES
+════════════════════════════════════ -->
+<section id="features" class="py-24 px-5 max-w-6xl mx-auto">
 
-    <div class="reveal">
-      <p class="text-slate text-xs uppercase tracking-widest mb-6">Who we are</p>
-      <h2 class="section-heading mb-8">Logic<br/>meets <em>craft</em></h2>
-      <p class="text-slate text-sm leading-relaxed mb-4 max-w-md">
-        MNM Logic is a web and software studio based in Velika Kladuša, Bosnia &amp; Herzegovina. We partner with businesses across the region to ship digital products that work — cleanly engineered and built to last.
-      </p>
-      <p class="text-slate text-sm leading-relaxed max-w-md">
-        Great software is equal parts logic and empathy. Every project starts with understanding the human on the other end — and ends when they tell us they love using it.
-      </p>
-      <div class="mt-8 flex items-center gap-5 flex-wrap">
-        <a href="mailto:info@mnmlogic.com" class="foot-link text-xs uppercase tracking-widest">Email</a>
-        <span class="text-rule text-xs">|</span>
-        <a href="#" class="foot-link text-xs uppercase tracking-widest">LinkedIn</a>
-        <span class="text-rule text-xs">|</span>
-        <a href="#" class="foot-link text-xs uppercase tracking-widest">GitHub</a>
+  <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <span class="badge mb-4 inline-flex">Our Capabilities</span>
+    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
+      Everything you need to<br/><span class="gradient-text-blue">ship great software</span>
+    </h2>
+    <p class="text-gray-500 text-lg">From a single landing page to a full business platform — we cover the full stack.</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <!-- Feature 1 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d1">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(39,154,241,0.1);">
+        <svg class="w-6 h-6" style="color:#279AF1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">Web Development</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Custom web apps from landing pages to full-stack platforms — fast, secure, and built to scale.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Django</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">React</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">REST API</span>
       </div>
     </div>
 
-    <!-- Quote card with big logo icon -->
+    <!-- Feature 2 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d2">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(196,153,145,0.12);">
+        <svg class="w-6 h-6" style="color:#C49991" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">UI / UX Design</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Interfaces people actually enjoy. Intuitive, beautiful experiences built for conversion.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Figma</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Prototyping</span>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d3">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(39,154,241,0.1);">
+        <svg class="w-6 h-6" style="color:#279AF1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75M3.75 10.125v3.75"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">Business Software</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Accounting systems, ERP modules, and custom tools — tailored to FBiH regulations and local needs.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">FBiH Standards</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">ERP</span>
+      </div>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d4">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(39,154,241,0.1);">
+        <svg class="w-6 h-6" style="color:#279AF1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">Cloud & Deployment</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Docker, CI/CD pipelines, and reliable VPS infrastructure — from staging to production.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Docker</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">VPS</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">SSL</span>
+      </div>
+    </div>
+
+    <!-- Feature 5 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d5">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(196,153,145,0.12);">
+        <svg class="w-6 h-6" style="color:#C49991" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">Maintenance & Support</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Ongoing updates, security patches, and rapid response — so your business never skips a beat.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Monitoring</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Support</span>
+      </div>
+    </div>
+
+    <!-- Feature 6 -->
+    <div class="feature-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d6">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(39,154,241,0.1);">
+        <svg class="w-6 h-6" style="color:#279AF1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+        </svg>
+      </div>
+      <h3 class="font-bold text-gray-900 text-lg mb-2">Consulting</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">Architecture planning, tech stack selection, and digital strategy — clear guidance, no jargon.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Strategy</span>
+        <span class="text-xs bg-gray-100 text-gray-500 rounded-full px-2.5 py-0.5">Audit</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     ABOUT / SPLIT SECTION
+════════════════════════════════════ -->
+<section id="about" class="py-24 px-5 bg-gray-50/60">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+    <!-- Text -->
+    <div class="reveal">
+      <span class="badge mb-5 inline-flex">Who we are</span>
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-6">
+        Logic meets<br/><span class="gradient-text-blue">craft.</span>
+      </h2>
+      <p class="text-gray-500 text-lg leading-relaxed mb-5">
+        MNM Logic is a web and software studio based in Velika Kladuša, Bosnia &amp; Herzegovina.
+        We partner with businesses across the region to ship digital products that work —
+        cleanly engineered and built to last.
+      </p>
+      <p class="text-gray-500 leading-relaxed mb-8">
+        Great software is equal parts logic and empathy. Every project starts with understanding
+        the human on the other end — and ends when they tell us they love using it.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#contact" class="bg-brand-blue text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-500 transition-all shadow-sm hover:shadow-blue-200 hover:shadow-lg text-sm">
+          Work with us →
+        </a>
+        <a href="mailto:info@mnmlogic.com" class="text-sm font-medium text-gray-500 hover:text-brand-blue transition-colors">
+          info@mnmlogic.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Card / visual -->
     <div class="reveal d2">
-      <div class="border border-rule rounded-2xl p-9 bg-card">
-        <!-- Large icon mark inside card — white with glow -->
-        <div class="logo-glow mb-8" style="display:inline-block;">
-          <svg width="64" height="64" viewBox="0 0 200 180" aria-label="MNM Logic mark">
-            <use href="#logo-icon"/>
-          </svg>
-        </div>
-        <p class="font-serif italic text-paper leading-snug mb-8"
-           style="font-size:clamp(1.3rem,3vw,1.9rem);">
-          "Designed by logic.<br/>Loved by users."
-        </p>
-        <div class="flex items-center gap-3 pt-6 border-t border-rule">
-          <div style="width:2.2rem;height:2.2rem;border-radius:9999px;
-                      background:rgba(39,154,241,0.15);
-                      display:flex;align-items:center;justify-content:center;
-                      color:#279AF1;font-weight:700;font-size:.8rem;">M</div>
-          <div>
-            <p class="text-paper text-sm font-medium">MNM Logic</p>
-            <p class="text-slate text-xs">Velika Kladuša, BiH</p>
+      <div class="relative">
+        <!-- Main card -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-xl p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <svg width="40" height="40" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
+            <div>
+              <p class="font-bold text-gray-900">MNM Logic</p>
+              <p class="text-xs text-gray-400">Web & Software Studio</p>
+            </div>
+            <span class="ml-auto text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full">● Available</span>
+          </div>
+          <blockquote class="text-gray-700 text-lg font-medium leading-relaxed mb-6 italic border-l-4 pl-4" style="border-color:#279AF1">
+            "Designed by logic. Loved by users."
+          </blockquote>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+              <p class="text-2xl font-extrabold text-gray-900">40+</p>
+              <p class="text-xs text-gray-400 mt-0.5">Projects</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 text-center">
+              <p class="text-2xl font-extrabold text-gray-900">5+</p>
+              <p class="text-xs text-gray-400 mt-0.5">Years</p>
+            </div>
           </div>
         </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-4 -right-4 bg-brand-blue text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-blue-200">
+          🇧🇦 Velika Kladuša, BiH
+        </div>
       </div>
     </div>
 
@@ -428,122 +458,191 @@
 </section>
 
 
-<!-- ══════════════ TESTIMONIALS ══════════════ -->
-<section class="border-t border-rule px-6 md:px-14 py-24 max-w-7xl mx-auto">
-  <div class="mb-14 reveal">
-    <p class="text-slate text-xs uppercase tracking-widest mb-5">Kind words</p>
-    <h2 class="section-heading">Clients love<br/><em>working&nbsp;with&nbsp;us</em></h2>
+<!-- ════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════ -->
+<section class="py-24 px-5 max-w-6xl mx-auto">
+
+  <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+    <span class="badge mb-4 inline-flex">Testimonials</span>
+    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+      Clients love working<br/><span class="gradient-text-blue">with us</span>
+    </h2>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    <div class="border border-rule rounded-2xl p-8 bg-card reveal d1">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">"The team at MNM Logic delivered our accounting platform in record time — clean code, zero bugs at launch, and they understood our local compliance requirements from day one."</p>
-      <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">A</div>
-        <div><p class="text-paper text-sm font-medium">Amir Hadžić</p><p class="text-slate text-xs">CFO, RetailPro</p></div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="testi-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d1">
+      <div class="flex gap-1 mb-4">
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed mb-6">"The team at MNM Logic delivered our accounting platform in record time — clean code, zero bugs at launch, and they understood our local compliance requirements from day one."</p>
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background:#279AF1;">A</div>
+        <div>
+          <p class="font-semibold text-gray-900 text-sm">Amir Hadžić</p>
+          <p class="text-xs text-gray-400">CFO, RetailPro</p>
+        </div>
       </div>
     </div>
-    <div class="border border-rule rounded-2xl p-8 bg-card reveal d2">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">"Working with MNM Logic was a breath of fresh air. Fast communication, thoughtful design decisions, and a product we're genuinely proud to show our customers."</p>
-      <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(196,153,145,0.15);display:flex;align-items:center;justify-content:center;color:#C49991;font-weight:700;font-size:.8rem;">S</div>
-        <div><p class="text-paper text-sm font-medium">Sara Kršo</p><p class="text-slate text-xs">Founder, EduNext</p></div>
+
+    <div class="testi-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d2">
+      <div class="flex gap-1 mb-4">
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed mb-6">"Working with MNM Logic was a breath of fresh air. Fast communication, thoughtful design decisions, and a product we're genuinely proud to show our customers."</p>
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background:#C49991;">S</div>
+        <div>
+          <p class="font-semibold text-gray-900 text-sm">Sara Kršo</p>
+          <p class="text-xs text-gray-400">Founder, EduNext</p>
+        </div>
       </div>
     </div>
-    <div class="border border-rule rounded-2xl p-8 bg-card reveal d3">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">"They don't just write code — they ask the right questions, push back when needed, and always deliver something better than what we imagined."</p>
-      <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">N</div>
-        <div><p class="text-paper text-sm font-medium">Nermin Ibišević</p><p class="text-slate text-xs">CEO, FastLog</p></div>
+
+    <div class="testi-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm reveal d3">
+      <div class="flex gap-1 mb-4">
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
       </div>
+      <p class="text-gray-600 text-sm leading-relaxed mb-6">"They don't just write code — they ask the right questions, push back when needed, and always deliver something better than what we imagined."</p>
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background:#279AF1;">N</div>
+        <div>
+          <p class="font-semibold text-gray-900 text-sm">Nermin Ibišević</p>
+          <p class="text-xs text-gray-400">CEO, FastLog</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     CTA BAND
+════════════════════════════════════ -->
+<section id="contact" class="cta-bg py-24 px-5 mx-5 md:mx-8 mb-8 rounded-3xl">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-8">
+      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+      Ready to build something great?
+    </span>
+    <h2 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+      Let's work together.
+    </h2>
+    <p class="text-white/60 text-lg mb-10 max-w-xl mx-auto">
+      Tell us about your project and we'll get back to you within 24 hours.
+      No commitment, no fluff — just a conversation.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="mailto:info@mnmlogic.com"
+         class="bg-brand-blue text-white font-semibold px-8 py-4 rounded-xl text-base hover:bg-blue-400 transition-all shadow-lg shadow-blue-900/30">
+        Send us an email →
+      </a>
+      <a href="mailto:info@mnmlogic.com"
+         class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl text-base border border-white/20 hover:bg-white/20 transition-all">
+        info@mnmlogic.com
+      </a>
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════ CTA ══════════════ -->
-<section id="contact" class="border-t border-rule px-6 md:px-14 py-28 max-w-7xl mx-auto text-center">
-  <div class="reveal">
-    <p class="text-slate text-xs uppercase tracking-widest mb-10">Ready to start?</p>
-    <h2 class="section-heading mb-12">Let's build<br/><em>something&nbsp;great</em></h2>
-    <a href="mailto:info@mnmlogic.com" class="btn-main text-base px-10 py-4">
-      Work with us
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
-      </svg>
-    </a>
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer class="max-w-6xl mx-auto px-5 md:px-8 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
+  <div class="col-span-2 md:col-span-1">
+    <div class="flex items-center gap-2 mb-4">
+      <svg width="26" height="26" viewBox="0 0 200 180"><use href="#logo-icon-blue"/></svg>
+      <span class="font-bold text-gray-900">MNM <span class="text-brand-blue">Logic</span></span>
+    </div>
+    <p class="text-gray-400 text-sm leading-relaxed">Web & Software Studio<br/>Velika Kladuša, BiH</p>
+    <p class="text-gray-400 text-sm mt-3">M–F 9AM–5PM CET</p>
   </div>
-</section>
-
-
-<!-- ══════════════ FOOTER ══════════════ -->
-<footer class="border-t border-rule px-6 md:px-14 py-14 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
   <div>
-    <div class="logo-glow mb-5" style="display:inline-block;">
-      <svg width="110" height="26" viewBox="0 0 340 200" aria-label="MNM Logic">
-        <use href="#logo-full"/>
-      </svg>
-    </div>
-    <p class="text-slate text-xs leading-relaxed">Web &amp; Software Studio<br/>Velika Kladuša, BiH</p>
-  </div>
-  <div>
-    <p class="text-paper text-xs uppercase tracking-widest mb-4">Contact</p>
-    <ul class="space-y-2 list-none">
-      <li><a href="mailto:info@mnmlogic.com" class="foot-link">info@mnmlogic.com</a></li>
-      <li><span class="text-slate text-xs">M–F 9AM–5PM CET</span></li>
+    <p class="font-semibold text-gray-900 text-sm mb-4">Services</p>
+    <ul class="space-y-2.5 list-none text-sm text-gray-400">
+      <li><a href="#features" class="hover:text-brand-blue transition-colors">Web Development</a></li>
+      <li><a href="#features" class="hover:text-brand-blue transition-colors">UI/UX Design</a></li>
+      <li><a href="#features" class="hover:text-brand-blue transition-colors">Business Software</a></li>
+      <li><a href="#features" class="hover:text-brand-blue transition-colors">Consulting</a></li>
     </ul>
   </div>
   <div>
-    <p class="text-paper text-xs uppercase tracking-widest mb-4">Site</p>
-    <ul class="space-y-2 list-none">
-      <li><a href="#capabilities" class="foot-link">Capabilities</a></li>
-      <li><a href="#clients"      class="foot-link">Clients</a></li>
-      <li><a href="#about"        class="foot-link">About</a></li>
-      <li><a href="#contact"      class="foot-link">Contact</a></li>
+    <p class="font-semibold text-gray-900 text-sm mb-4">Company</p>
+    <ul class="space-y-2.5 list-none text-sm text-gray-400">
+      <li><a href="#about"   class="hover:text-brand-blue transition-colors">About</a></li>
+      <li><a href="#clients" class="hover:text-brand-blue transition-colors">Clients</a></li>
+      <li><a href="#contact" class="hover:text-brand-blue transition-colors">Contact</a></li>
     </ul>
   </div>
   <div>
-    <p class="text-paper text-xs uppercase tracking-widest mb-4">Social</p>
-    <ul class="space-y-2 list-none">
-      <li><a href="#" class="foot-link">LinkedIn</a></li>
-      <li><a href="#" class="foot-link">GitHub</a></li>
-      <li><a href="#" class="foot-link">Instagram</a></li>
+    <p class="font-semibold text-gray-900 text-sm mb-4">Connect</p>
+    <ul class="space-y-2.5 list-none text-sm text-gray-400">
+      <li><a href="#" class="hover:text-brand-blue transition-colors">LinkedIn</a></li>
+      <li><a href="#" class="hover:text-brand-blue transition-colors">GitHub</a></li>
+      <li><a href="#" class="hover:text-brand-blue transition-colors">Instagram</a></li>
+      <li><a href="mailto:info@mnmlogic.com" class="hover:text-brand-blue transition-colors">Email</a></li>
     </ul>
   </div>
 </footer>
 
-<div class="border-t border-rule px-6 md:px-14 py-5 max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-  <p class="text-slate text-xs">&copy; 2025 MNM Logic. All rights reserved.</p>
-  <p class="text-slate text-xs">Designed by MNM Logic</p>
+<div class="border-t border-gray-100 max-w-6xl mx-auto px-5 md:px-8 py-5 flex flex-wrap justify-between items-center gap-4">
+  <p class="text-gray-400 text-xs">&copy; 2025 MNM Logic. All rights reserved.</p>
+  <p class="text-gray-400 text-xs">Designed & built by MNM Logic · Velika Kladuša, BiH</p>
 </div>
 
 
-<!-- ══════════════ SCRIPTS ══════════════ -->
+<!-- ════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════ -->
 <script>
-  // ── SERVICE TICKER ──
-  const svcItems = ['Web Development','UI / UX Design','Business Software','Cloud & Deployment','Maintenance & Support','Technical Consulting'];
-  document.getElementById('svcTicker').innerHTML = [...svcItems, ...svcItems]
-    .map(s => `<span style="display:inline-flex;align-items:center;gap:1.5rem;padding:0 1.8rem;
-                             font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#60656F;">
-                 ${s}<span style="color:#279AF1;font-size:.55rem;">✦</span>
-               </span>`).join('');
-
   // ── CLIENT TICKER ──
   const clients = [
-    {name:'RetailPro',sector:'E-Commerce'},{name:'MediCare+',sector:'Healthcare'},
-    {name:'LexGroup',sector:'Legal'},{name:'BuildTech',sector:'Construction'},
-    {name:'FastLog',sector:'Logistics'},{name:'EduNext',sector:'Education'},
-    {name:'AgroSmart',sector:'Agriculture'},{name:'FinAxis',sector:'Finance'},
+    { name: 'RetailPro',  sector: 'E-Commerce'  },
+    { name: 'MediCare+',  sector: 'Healthcare'  },
+    { name: 'LexGroup',   sector: 'Legal'        },
+    { name: 'BuildTech',  sector: 'Construction' },
+    { name: 'FastLog',    sector: 'Logistics'    },
+    { name: 'EduNext',    sector: 'Education'    },
+    { name: 'AgroSmart',  sector: 'Agriculture'  },
+    { name: 'FinAxis',    sector: 'Finance'      },
   ];
-  document.getElementById('clientTrack').innerHTML = [...clients,...clients]
-    .map(c=>`<span class="client-pill">${c.name}<span style="opacity:.4;font-size:.65rem;margin-left:.4rem;">· ${c.sector}</span></span>`)
+
+  document.getElementById('clientTrack').innerHTML = [...clients, ...clients]
+    .map(c => `
+      <div style="display:inline-flex;align-items:center;gap:0.6rem;
+                  margin:0 1.2rem;padding:0.6rem 1.4rem;
+                  background:#fff;border:1px solid #f0f0f0;border-radius:9999px;
+                  box-shadow:0 1px 4px rgba(0,0,0,0.05);flex-shrink:0;">
+        <span style="font-weight:600;font-size:0.85rem;color:#131112;">${c.name}</span>
+        <span style="font-size:0.7rem;color:#9ca3af;letter-spacing:0.04em;">${c.sector}</span>
+      </div>`)
     .join('');
 
   // ── SCROLL REVEAL ──
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);} });
-  },{threshold:.1});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── MOBILE MENU ──
+  document.getElementById('menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
 </script>
 
 </body>
