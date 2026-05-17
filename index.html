@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
 
   <script>
     tailwind.config = {
@@ -33,7 +33,6 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-
     body {
       background: #131112;
       color: #F7F7FF;
@@ -44,15 +43,25 @@
 
     /* ── TICKER ── */
     .ticker-wrap { overflow: hidden; }
-    .ticker-track {
-      display: flex;
-      width: max-content;
-      animation: ticker 34s linear infinite;
-    }
+    .ticker-track { display:flex; width:max-content; animation: ticker 34s linear infinite; }
     .ticker-track:hover { animation-play-state: paused; }
     @keyframes ticker {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
+    }
+
+    /* ── LOGO SVG ── */
+    .logo-svg { display:block; }
+
+    /* White logo glow — subtle on dark bg */
+    .logo-glow {
+      filter: drop-shadow(0 0 6px rgba(247,247,255,0.55))
+              drop-shadow(0 0 14px rgba(39,154,241,0.25));
+      transition: filter 0.3s;
+    }
+    .logo-glow:hover {
+      filter: drop-shadow(0 0 10px rgba(247,247,255,0.8))
+              drop-shadow(0 0 22px rgba(39,154,241,0.45));
     }
 
     /* ── HEADINGS ── */
@@ -63,10 +72,7 @@
       letter-spacing: -0.03em;
       color: #F7F7FF;
     }
-    .hero-headline em {
-      font-style: italic;
-      color: #C49991; /* rose for hero italic */
-    }
+    .hero-headline em { font-style: italic; color: #C49991; }
 
     .section-heading {
       font-family: 'DM Serif Display', Georgia, serif;
@@ -75,24 +81,18 @@
       letter-spacing: -0.025em;
       color: #F7F7FF;
     }
-    .section-heading em {
-      font-style: italic;
-      color: #279AF1; /* blue for section italic */
-    }
+    .section-heading em { font-style: italic; color: #279AF1; }
 
     /* ── NAV ── */
     .nav-bar {
-      background: rgba(19,17,18,0.92);
+      background: rgba(19,17,18,0.93);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid #252224;
     }
 
     /* ── CAPABILITY ROWS ── */
-    .cap-row {
-      border-top: 1px solid #252224;
-      transition: background 0.25s;
-    }
+    .cap-row { border-top: 1px solid #252224; transition: background 0.25s; }
     .cap-row:last-child { border-bottom: 1px solid #252224; }
     .cap-row:hover { background: #1a1819; }
 
@@ -100,126 +100,145 @@
     .pill {
       border: 1px solid #252224;
       border-radius: 9999px;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #60656F;
-      padding: 0.3rem 0.9rem;
-      white-space: nowrap;
+      font-size: 0.7rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #60656F;
+      padding: 0.3rem 0.9rem; white-space: nowrap;
       transition: color 0.2s, border-color 0.2s;
     }
-    .pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.5); }
+    .pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.45); }
 
     /* ── CLIENT PILL ── */
     .client-pill {
-      border: 1px solid #252224;
-      border-radius: 9999px;
-      padding: 0.5rem 1.5rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: #60656F;
-      white-space: nowrap;
-      margin: 0 0.5rem;
-      flex-shrink: 0;
+      border: 1px solid #252224; border-radius: 9999px;
+      padding: 0.5rem 1.5rem; font-size: 0.75rem;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: #60656F; white-space: nowrap; margin: 0 0.5rem; flex-shrink: 0;
       transition: color 0.2s, border-color 0.2s;
     }
-    .client-pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.5); }
+    .client-pill:hover { color: #279AF1; border-color: rgba(39,154,241,0.45); }
 
     /* ── BUTTONS ── */
     .btn-main {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: #279AF1;
-      color: #131112;
-      font-weight: 600;
-      font-size: 0.83rem;
-      letter-spacing: 0.04em;
-      padding: 0.75rem 1.8rem;
-      border-radius: 9999px;
-      text-decoration: none;
+      display:inline-flex; align-items:center; gap:0.45rem;
+      background:#279AF1; color:#131112;
+      font-weight:600; font-size:0.83rem; letter-spacing:0.04em;
+      padding:0.75rem 1.8rem; border-radius:9999px;
+      text-decoration:none;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .btn-main:hover {
-      background: #4daaef;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(39,154,241,0.25);
-    }
+    .btn-main:hover { background:#4daaef; transform:translateY(-1px); box-shadow:0 8px 24px rgba(39,154,241,0.25); }
 
     .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: transparent;
-      color: #F7F7FF;
-      font-size: 0.83rem;
-      letter-spacing: 0.04em;
-      padding: 0.75rem 1.8rem;
-      border-radius: 9999px;
-      border: 1px solid #252224;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
+      display:inline-flex; align-items:center; gap:0.45rem;
+      background:transparent; color:#F7F7FF;
+      font-size:0.83rem; letter-spacing:0.04em;
+      padding:0.75rem 1.8rem; border-radius:9999px;
+      border:1px solid #252224; text-decoration:none;
+      transition:border-color 0.2s;
     }
-    .btn-ghost:hover { border-color: #60656F; }
+    .btn-ghost:hover { border-color:#60656F; }
 
     /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal.on { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.08s; }
-    .d2 { transition-delay: 0.16s; }
-    .d3 { transition-delay: 0.24s; }
-    .d4 { transition-delay: 0.32s; }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    .d1 { transition-delay:.08s; }
+    .d2 { transition-delay:.16s; }
+    .d3 { transition-delay:.24s; }
+    .d4 { transition-delay:.32s; }
 
     /* ── MISC ── */
-    .foot-link {
-      color: #60656F;
-      font-size: 0.82rem;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .foot-link:hover { color: #F7F7FF; }
+    .foot-link { color:#60656F; font-size:0.82rem; text-decoration:none; transition:color 0.2s; }
+    .foot-link:hover { color:#F7F7FF; }
+    .svc-num { font-family:'DM Serif Display',serif; font-style:italic; font-size:1rem; color:#60656F; min-width:2rem; }
 
-    .svc-num {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: #60656F;
-      min-width: 2rem;
-    }
-
-    /* blue dot pulse */
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.6; transform: scale(1.4); }
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.6; transform:scale(1.4); }
     }
     .dot-pulse { animation: pulse-dot 2.4s ease-in-out infinite; }
-
-    /* logo white version (logo has black bg — we show it with mix-blend) */
-    .logo-img {
-      height: 36px;
-      width: auto;
-      /* The uploaded logo has black background; we use mix-blend-mode
-         so it composites cleanly over the dark nav */
-      mix-blend-mode: lighten;
-    }
   </style>
 </head>
 <body>
 
+<!--
+  ██╗      ██████╗  ██████╗  ██████╗
+  ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
+  ██║     ██║   ██║██║  ███╗██║   ██║
+  ██║     ██║   ██║██║   ██║██║   ██║
+  ███████╗╚██████╔╝╚██████╔╝╚██████╔╝
+-->
+
+<!-- ══════════════ INLINE SVG LOGO (reusable via <use>) ══════════════
+     Crown shape traced from the original PNG.
+     All paths in white so it pops on any dark background.
+     The shadow facets use semi-transparent white for depth.
+-->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- ICON ONLY (crown mark) -->
+    <symbol id="logo-icon" viewBox="0 0 200 180">
+      <!-- Left outer spike -->
+      <polygon points="30,170 72,60 100,130" fill="#F7F7FF"/>
+      <!-- Left shadow facet -->
+      <polygon points="72,60 100,130 80,145" fill="rgba(247,247,255,0.35)"/>
+      <!-- Centre spike -->
+      <polygon points="70,0 100,130 130,0" fill="#F7F7FF"/>
+      <!-- Centre shadow left -->
+      <polygon points="100,130 84,155 70,0" fill="rgba(247,247,255,0.28)"/>
+      <!-- Centre shadow right -->
+      <polygon points="100,130 116,155 130,0" fill="rgba(247,247,255,0.18)"/>
+      <!-- Right outer spike -->
+      <polygon points="170,170 128,60 100,130" fill="#F7F7FF"/>
+      <!-- Right shadow facet -->
+      <polygon points="128,60 100,130 120,145" fill="rgba(247,247,255,0.35)"/>
+      <!-- Bottom gem / notch -->
+      <polygon points="84,155 100,175 116,155 100,130" fill="#F7F7FF"/>
+      <!-- Bottom gem shadow -->
+      <polygon points="100,130 100,175 116,155" fill="rgba(247,247,255,0.3)"/>
+    </symbol>
+
+    <!-- FULL LOCKUP (icon + wordmark) -->
+    <symbol id="logo-full" viewBox="0 0 340 200">
+      <!-- Crown mark (scaled + centered above text) -->
+      <g transform="translate(70,0) scale(1)">
+        <polygon points="30,115 67,40 95,88" fill="#F7F7FF"/>
+        <polygon points="67,40 95,88 76,100" fill="rgba(247,247,255,0.32)"/>
+        <polygon points="55,0 95,88 135,0" fill="#F7F7FF"/>
+        <polygon points="95,88 80,108 55,0" fill="rgba(247,247,255,0.26)"/>
+        <polygon points="95,88 110,108 135,0" fill="rgba(247,247,255,0.17)"/>
+        <polygon points="160,115 123,40 95,88" fill="#F7F7FF"/>
+        <polygon points="123,40 95,88 114,100" fill="rgba(247,247,255,0.32)"/>
+        <polygon points="80,108 95,122 110,108 95,88" fill="#F7F7FF"/>
+        <polygon points="95,88 95,122 110,108" fill="rgba(247,247,255,0.28)"/>
+      </g>
+      <!-- Wordmark: MNM in blue, LOGIC in white -->
+      <text x="0" y="185"
+            font-family="'DM Sans', system-ui, sans-serif"
+            font-weight="600"
+            font-size="48"
+            letter-spacing="2"
+            fill="#279AF1">MNM</text>
+      <text x="164" y="185"
+            font-family="'DM Sans', system-ui, sans-serif"
+            font-weight="300"
+            font-size="48"
+            letter-spacing="2"
+            fill="#F7F7FF"> LOGIC</text>
+    </symbol>
+  </defs>
+</svg>
+
+
 <!-- ══════════════ NAV ══════════════ -->
 <nav class="nav-bar sticky top-0 z-50 px-6 md:px-14 py-3 flex items-center justify-between gap-6">
 
-  <!-- Logo -->
-  <a href="#" class="flex items-center gap-3 flex-shrink-0">
-    <img src="logo.png" alt="MNM Logic" class="logo-img"/>
+  <a href="#" class="flex items-center gap-3 flex-shrink-0 logo-glow">
+    <!-- Icon mark + text lockup -->
+    <svg class="logo-svg" width="160" height="38" viewBox="0 0 340 200" aria-label="MNM Logic">
+      <use href="#logo-full"/>
+    </svg>
   </a>
 
-  <!-- Links -->
   <ul class="hidden md:flex items-center gap-8 list-none text-sm text-slate">
     <li><a href="#capabilities" class="hover:text-paper transition-colors duration-200">Capabilities</a></li>
     <li><a href="#clients"      class="hover:text-paper transition-colors duration-200">Clients</a></li>
@@ -227,7 +246,6 @@
     <li><a href="#contact"      class="hover:text-paper transition-colors duration-200">Contact</a></li>
   </ul>
 
-  <!-- CTA -->
   <a href="mailto:info@mnmlogic.com" class="btn-main text-xs py-2 px-5 flex-shrink-0">
     Work with us
     <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -240,26 +258,21 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section class="px-6 md:px-14 pt-20 md:pt-32 pb-16 max-w-7xl mx-auto">
 
-  <!-- Eyebrow -->
   <div class="mb-8 flex items-center gap-3 reveal">
     <span class="w-2 h-2 rounded-full bg-blue dot-pulse inline-block"></span>
     <span class="text-slate text-xs uppercase tracking-widest">Web &amp; Software Studio · Velika Kladuša, BiH</span>
   </div>
 
-  <!-- Headline -->
-  <h1 class="hero-headline mb-12 reveal d1">
+  <h1 class="hero-headline mb-10 reveal d1">
     We build<br/>
     <em>things&nbsp;people</em><br/>
     actually&nbsp;use.
   </h1>
 
-  <!-- Tagline -->
-  <p class="text-slate text-base md:text-lg max-w-md leading-relaxed mb-10 reveal d2"
-     style="font-style: italic; color: #C49991;">
+  <p class="text-rose text-base md:text-lg max-w-md leading-relaxed mb-10 font-light italic reveal d2">
     Designed by logic. Loved by users.
   </p>
 
-  <!-- Buttons -->
   <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 reveal d3">
     <a href="#capabilities" class="btn-main">
       See our capabilities
@@ -267,29 +280,15 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
       </svg>
     </a>
-    <a href="mailto:info@mnmlogic.com" class="btn-ghost">
-      info@mnmlogic.com
-    </a>
+    <a href="mailto:info@mnmlogic.com" class="btn-ghost">info@mnmlogic.com</a>
   </div>
 
   <!-- Stats -->
   <div class="mt-20 pt-8 border-t border-rule grid grid-cols-2 md:grid-cols-4 gap-10 reveal d4">
-    <div>
-      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">5+</p>
-      <p class="text-slate text-xs uppercase tracking-widest">Years active</p>
-    </div>
-    <div>
-      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">40+</p>
-      <p class="text-slate text-xs uppercase tracking-widest">Projects shipped</p>
-    </div>
-    <div>
-      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">12+</p>
-      <p class="text-slate text-xs uppercase tracking-widest">Clients served</p>
-    </div>
-    <div>
-      <p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">100%</p>
-      <p class="text-slate text-xs uppercase tracking-widest">Remote-ready</p>
-    </div>
+    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">5+</p><p class="text-slate text-xs uppercase tracking-widest">Years active</p></div>
+    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">40+</p><p class="text-slate text-xs uppercase tracking-widest">Projects shipped</p></div>
+    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">12+</p><p class="text-slate text-xs uppercase tracking-widest">Clients served</p></div>
+    <div><p class="font-serif italic text-paper mb-1" style="font-size:3rem;line-height:1;">100%</p><p class="text-slate text-xs uppercase tracking-widest">Remote-ready</p></div>
   </div>
 </section>
 
@@ -308,76 +307,58 @@
     <h2 class="section-heading">Built around<br/><em>your&nbsp;goals</em></h2>
   </div>
 
-  <!-- Row 01 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">01</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Web Development</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Custom web applications from landing pages to full-stack platforms — fast, secure, and scalable.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">Django</span><span class="pill">React</span><span class="pill">REST API</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Django</span><span class="pill">React</span><span class="pill">REST API</span></div>
   </div>
 
-  <!-- Row 02 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">02</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">UI / UX Design</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Interfaces people actually enjoy — intuitive, beautiful, and built for conversion.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">Figma</span><span class="pill">Prototyping</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Figma</span><span class="pill">Prototyping</span></div>
   </div>
 
-  <!-- Row 03 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">03</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Business Software</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Accounting systems, ERP modules, and custom tools — tailored to FBiH regulations and local market needs.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">FBiH Standards</span><span class="pill">ERP</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">FBiH Standards</span><span class="pill">ERP</span></div>
   </div>
 
-  <!-- Row 04 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">04</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Cloud &amp; Deployment</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Docker, CI/CD pipelines, and reliable VPS infrastructure — from staging to production.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">Docker</span><span class="pill">VPS</span><span class="pill">SSL</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Docker</span><span class="pill">VPS</span><span class="pill">SSL</span></div>
   </div>
 
-  <!-- Row 05 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">05</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Maintenance &amp; Support</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Ongoing updates, security patches, and rapid response — so your business never skips a beat.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">Monitoring</span><span class="pill">Support</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Monitoring</span><span class="pill">Support</span></div>
   </div>
 
-  <!-- Row 06 -->
   <div class="cap-row py-9 md:py-10 grid grid-cols-1 md:grid-cols-[60px_1fr_220px] gap-5 md:gap-10 items-start reveal">
     <span class="svc-num">06</span>
     <div>
       <h3 class="font-serif text-xl md:text-2xl text-paper mb-2">Consulting</h3>
       <p class="text-slate text-sm leading-relaxed max-w-lg">Architecture planning, tech stack selection, and digital strategy — clear guidance, no jargon.</p>
     </div>
-    <div class="flex flex-wrap gap-2 md:justify-end">
-      <span class="pill">Strategy</span><span class="pill">Audit</span>
-    </div>
+    <div class="flex flex-wrap gap-2 md:justify-end"><span class="pill">Strategy</span><span class="pill">Audit</span></div>
   </div>
 
 </section>
@@ -399,7 +380,6 @@
 <section id="about" class="border-t border-rule px-6 md:px-14 py-24 max-w-7xl mx-auto">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
-    <!-- Text -->
     <div class="reveal">
       <p class="text-slate text-xs uppercase tracking-widest mb-6">Who we are</p>
       <h2 class="section-heading mb-8">Logic<br/>meets <em>craft</em></h2>
@@ -410,28 +390,32 @@
         Great software is equal parts logic and empathy. Every project starts with understanding the human on the other end — and ends when they tell us they love using it.
       </p>
       <div class="mt-8 flex items-center gap-5 flex-wrap">
-        <a href="mailto:info@mnmlogic.com" class="foot-link text-xs uppercase tracking-widest hover:text-paper">Email</a>
+        <a href="mailto:info@mnmlogic.com" class="foot-link text-xs uppercase tracking-widest">Email</a>
         <span class="text-rule text-xs">|</span>
-        <a href="#" class="foot-link text-xs uppercase tracking-widest hover:text-paper">LinkedIn</a>
+        <a href="#" class="foot-link text-xs uppercase tracking-widest">LinkedIn</a>
         <span class="text-rule text-xs">|</span>
-        <a href="#" class="foot-link text-xs uppercase tracking-widest hover:text-paper">GitHub</a>
+        <a href="#" class="foot-link text-xs uppercase tracking-widest">GitHub</a>
       </div>
     </div>
 
-    <!-- Quote card -->
+    <!-- Quote card with big logo icon -->
     <div class="reveal d2">
       <div class="border border-rule rounded-2xl p-9 bg-card">
-        <!-- Logo inside card -->
-        <img src="mnmlogicplavi.png" alt="MNM Logic" class="logo-img mb-8" style="height:48px;"/>
+        <!-- Large icon mark inside card — white with glow -->
+        <div class="logo-glow mb-8" style="display:inline-block;">
+          <svg width="64" height="64" viewBox="0 0 200 180" aria-label="MNM Logic mark">
+            <use href="#logo-icon"/>
+          </svg>
+        </div>
         <p class="font-serif italic text-paper leading-snug mb-8"
-           style="font-size: clamp(1.3rem, 3vw, 1.9rem);">
+           style="font-size:clamp(1.3rem,3vw,1.9rem);">
           "Designed by logic.<br/>Loved by users."
         </p>
         <div class="flex items-center gap-3 pt-6 border-t border-rule">
-          <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.15);
-                      display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">
-            M
-          </div>
+          <div style="width:2.2rem;height:2.2rem;border-radius:9999px;
+                      background:rgba(39,154,241,0.15);
+                      display:flex;align-items:center;justify-content:center;
+                      color:#279AF1;font-weight:700;font-size:.8rem;">M</div>
           <div>
             <p class="text-paper text-sm font-medium">MNM Logic</p>
             <p class="text-slate text-xs">Velika Kladuša, BiH</p>
@@ -452,49 +436,27 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
     <div class="border border-rule rounded-2xl p-8 bg-card reveal d1">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">
-        "The team at MNM Logic delivered our accounting platform in record time — clean code, zero bugs at launch, and they understood our local compliance requirements from day one."
-      </p>
+      <p class="text-slate text-sm leading-relaxed italic mb-8">"The team at MNM Logic delivered our accounting platform in record time — clean code, zero bugs at launch, and they understood our local compliance requirements from day one."</p>
       <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);
-                    display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">A</div>
-        <div>
-          <p class="text-paper text-sm font-medium">Amir Hadžić</p>
-          <p class="text-slate text-xs">CFO, RetailPro</p>
-        </div>
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">A</div>
+        <div><p class="text-paper text-sm font-medium">Amir Hadžić</p><p class="text-slate text-xs">CFO, RetailPro</p></div>
       </div>
     </div>
-
     <div class="border border-rule rounded-2xl p-8 bg-card reveal d2">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">
-        "Working with MNM Logic was a breath of fresh air. Fast communication, thoughtful design decisions, and a product we're genuinely proud to show our customers."
-      </p>
+      <p class="text-slate text-sm leading-relaxed italic mb-8">"Working with MNM Logic was a breath of fresh air. Fast communication, thoughtful design decisions, and a product we're genuinely proud to show our customers."</p>
       <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(196,153,145,0.15);
-                    display:flex;align-items:center;justify-content:center;color:#C49991;font-weight:700;font-size:.8rem;">S</div>
-        <div>
-          <p class="text-paper text-sm font-medium">Sara Kršo</p>
-          <p class="text-slate text-xs">Founder, EduNext</p>
-        </div>
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(196,153,145,0.15);display:flex;align-items:center;justify-content:center;color:#C49991;font-weight:700;font-size:.8rem;">S</div>
+        <div><p class="text-paper text-sm font-medium">Sara Kršo</p><p class="text-slate text-xs">Founder, EduNext</p></div>
       </div>
     </div>
-
     <div class="border border-rule rounded-2xl p-8 bg-card reveal d3">
-      <p class="text-slate text-sm leading-relaxed italic mb-8">
-        "They don't just write code — they ask the right questions, push back when needed, and always deliver something better than what we imagined."
-      </p>
+      <p class="text-slate text-sm leading-relaxed italic mb-8">"They don't just write code — they ask the right questions, push back when needed, and always deliver something better than what we imagined."</p>
       <div class="flex items-center gap-3 pt-5 border-t border-rule">
-        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);
-                    display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">N</div>
-        <div>
-          <p class="text-paper text-sm font-medium">Nermin Ibišević</p>
-          <p class="text-slate text-xs">CEO, FastLog</p>
-        </div>
+        <div style="width:2.2rem;height:2.2rem;border-radius:9999px;background:rgba(39,154,241,0.12);display:flex;align-items:center;justify-content:center;color:#279AF1;font-weight:700;font-size:.8rem;">N</div>
+        <div><p class="text-paper text-sm font-medium">Nermin Ibišević</p><p class="text-slate text-xs">CEO, FastLog</p></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -503,9 +465,7 @@
 <section id="contact" class="border-t border-rule px-6 md:px-14 py-28 max-w-7xl mx-auto text-center">
   <div class="reveal">
     <p class="text-slate text-xs uppercase tracking-widest mb-10">Ready to start?</p>
-    <h2 class="section-heading mb-12">
-      Let's build<br/><em>something&nbsp;great</em>
-    </h2>
+    <h2 class="section-heading mb-12">Let's build<br/><em>something&nbsp;great</em></h2>
     <a href="mailto:info@mnmlogic.com" class="btn-main text-base px-10 py-4">
       Work with us
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -519,7 +479,11 @@
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer class="border-t border-rule px-6 md:px-14 py-14 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
   <div>
-    <img src="logo.png" alt="MNM Logic" class="logo-img mb-4" style="height:32px;"/>
+    <div class="logo-glow mb-5" style="display:inline-block;">
+      <svg width="110" height="26" viewBox="0 0 340 200" aria-label="MNM Logic">
+        <use href="#logo-full"/>
+      </svg>
+    </div>
     <p class="text-slate text-xs leading-relaxed">Web &amp; Software Studio<br/>Velika Kladuša, BiH</p>
   </div>
   <div>
@@ -557,44 +521,29 @@
 <!-- ══════════════ SCRIPTS ══════════════ -->
 <script>
   // ── SERVICE TICKER ──
-  const svcItems = [
-    'Web Development', 'UI / UX Design', 'Business Software',
-    'Cloud & Deployment', 'Maintenance & Support', 'Technical Consulting'
-  ];
-  const svcTicker = document.getElementById('svcTicker');
-  svcTicker.innerHTML = [...svcItems, ...svcItems]
-    .map(s => `
-      <span style="display:inline-flex;align-items:center;gap:1.5rem;
-                   padding:0 1.8rem;font-size:0.75rem;letter-spacing:0.12em;
-                   text-transform:uppercase;color:#60656F;">
-        ${s}
-        <span style="color:#279AF1;font-size:0.55rem;">✦</span>
-      </span>`)
-    .join('');
+  const svcItems = ['Web Development','UI / UX Design','Business Software','Cloud & Deployment','Maintenance & Support','Technical Consulting'];
+  document.getElementById('svcTicker').innerHTML = [...svcItems, ...svcItems]
+    .map(s => `<span style="display:inline-flex;align-items:center;gap:1.5rem;padding:0 1.8rem;
+                             font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#60656F;">
+                 ${s}<span style="color:#279AF1;font-size:.55rem;">✦</span>
+               </span>`).join('');
 
   // ── CLIENT TICKER ──
   const clients = [
-    { name: 'RetailPro',  sector: 'E-Commerce'  },
-    { name: 'MediCare+',  sector: 'Healthcare'  },
-    { name: 'LexGroup',   sector: 'Legal'        },
-    { name: 'BuildTech',  sector: 'Construction' },
-    { name: 'FastLog',    sector: 'Logistics'    },
-    { name: 'EduNext',    sector: 'Education'    },
-    { name: 'AgroSmart',  sector: 'Agriculture'  },
-    { name: 'FinAxis',    sector: 'Finance'      },
+    {name:'RetailPro',sector:'E-Commerce'},{name:'MediCare+',sector:'Healthcare'},
+    {name:'LexGroup',sector:'Legal'},{name:'BuildTech',sector:'Construction'},
+    {name:'FastLog',sector:'Logistics'},{name:'EduNext',sector:'Education'},
+    {name:'AgroSmart',sector:'Agriculture'},{name:'FinAxis',sector:'Finance'},
   ];
-  const clientTrack = document.getElementById('clientTrack');
-  clientTrack.innerHTML = [...clients, ...clients]
-    .map(c => `<span class="client-pill">${c.name}<span style="opacity:.4;font-size:.65rem;margin-left:.4rem;">· ${c.sector}</span></span>`)
+  document.getElementById('clientTrack').innerHTML = [...clients,...clients]
+    .map(c=>`<span class="client-pill">${c.name}<span style="opacity:.4;font-size:.65rem;margin-left:.4rem;">· ${c.sector}</span></span>`)
     .join('');
 
   // ── SCROLL REVEAL ──
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 
 </body>
