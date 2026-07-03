@@ -31,19 +31,7 @@ body::before {
   z-index: 0;
 }
 
-/* Subtle grid */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* Grid handled by grid.js canvas */
 
 .stage {
   position: relative;
@@ -67,7 +55,7 @@ body::after {
 }
 
 .logo-wrap img {
-  height: 48px;
+  height: 80px;
   width: auto;
   filter: brightness(1.05);
 }
