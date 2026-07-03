@@ -55,9 +55,24 @@ body::before {
 }
 
 .logo-wrap img {
-  height: 80px;
+  height: 110px;
   width: auto;
-  filter: brightness(1.05);
+  filter: brightness(1.1) drop-shadow(0 0 12px rgba(39,154,241,0.5)) drop-shadow(0 0 32px rgba(39,154,241,0.25));
+  animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both, logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: brightness(1.1)
+            drop-shadow(0 0 10px rgba(39,154,241,0.45))
+            drop-shadow(0 0 28px rgba(39,154,241,0.2));
+  }
+  50% {
+    filter: brightness(1.2)
+            drop-shadow(0 0 20px rgba(39,154,241,0.75))
+            drop-shadow(0 0 52px rgba(39,154,241,0.35))
+            drop-shadow(0 0 80px rgba(39,154,241,0.15));
+  }
 }
 
 /* Divider line */
